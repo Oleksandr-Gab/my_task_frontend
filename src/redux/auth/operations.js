@@ -19,10 +19,7 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post('/users/register', credentials);
-      // console.log(response.status);
-      // if (!response.ok) {
-      //   console.log("Email in use!");
-      // }
+
       setAuthHeader(response.data.token);
 
       return response.data;
@@ -80,7 +77,6 @@ export const refreshUser = createAsyncThunk(
     } = thunkAPI.getState();
     setAuthHeader(token);
     const response = await axios.get('/users/current');
-    // console.log(thunkAPI.getState());
     return response.data;
   },
   {
@@ -91,17 +87,6 @@ export const refreshUser = createAsyncThunk(
     },
   }
 );
-
-// ------------------------
-// export const userThema = createAsyncThunk("auth/thema", async (_, thunkAPI) => {
-//   try {
-//     const response = await axios.patch("/users/thema");
-//     setAuthHeader(response.data.token);
-//     return response.data;
-//   } catch (error) {
-//     return thunkAPI.rejectWithValue(error);
-//   }
-// });
 
 // ----------------------------
 export const help = createAsyncThunk('auth/support', async (_, thunkAPI) => {

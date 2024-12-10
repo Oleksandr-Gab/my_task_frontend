@@ -33,7 +33,11 @@ export default function App() {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
+  return isRefreshing ? (
+    <div>
+      <IsRefreshingComponent />
+    </div>
+  ) : (
     <Layout>
       <Suspense fallback={<IsRefreshingComponent />}>
         <Routes>
@@ -56,7 +60,9 @@ export default function App() {
           </Route>
           <Route
             path="/home"
-            element={<PrivateRoute component={<HomePage />} redirectTo="/" />}
+            element={
+              <PrivateRoute component={<HomePage />} redirectTo="/welcome" />
+            }
           />
           <Route
             path="/home/:boardId"

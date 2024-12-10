@@ -4,7 +4,7 @@
 
 .list {
   width: 100%;
-  height: calc(100vh - 560px);
+  height: calc(99vh - 520px);
   overflow: auto; /* Добавляем прокрутку */
   scrollbar-width: auto; /* Ширина полосы прокрутки (thin, auto, none) */
 }
@@ -16,4 +16,10 @@
   text-align: left;
   color: var(--color-icons-no-active);
   margin-bottom: 8px;
+}
+
+@media screen and (min-width: 768px) {
+  .list {
+    height: calc(99vh - 564px);
+  }
 }

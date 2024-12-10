@@ -9,7 +9,7 @@
   border-bottom: 1px solid var(--sidebar-lines);
   padding-top: 14px;
   padding-bottom: 14px;
-  margin-bottom: 40px;
+  margin-bottom: 14px;
 }
 
 .text {
@@ -35,4 +35,10 @@
 .btnPlus:hover {
   background: var(--color-hover-element);
   color: var(--color-hover-element);
+}
+
+@media screen and (min-width: 768px) {
+  .create {
+    margin-bottom: 16px;
+  }
 }

@@ -12,7 +12,7 @@
 
 .wrapper {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   flex-direction: column;
   width: 100%;
 }
@@ -20,11 +20,11 @@
 @media screen and (min-width: 768px) {
   .sidebar {
     width: 260px;
-    gap: 24px;
+    gap: 20px;
     padding: 24px;
   }
 
   .wrapper {
-    gap: 24px;
+    gap: 20px;
   }
 }
