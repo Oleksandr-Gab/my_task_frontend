@@ -1,0 +1,47 @@
+.header {
+  background-color: var(--background-header);
+  padding: 20px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    padding: 18px 32px;
+    width: 768px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .header {
+    display: flex;
+    padding: 18px 24px;
+    justify-content: flex-end;
+    width: 1180px;
+  }
+}
+
+.menuBurger {
+  color: var(--text-color);
+  width: 24px;
+  height: 24px;
+}
+
+@media screen and (min-width: 768px) {
+  .menuBurger {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .menuBurger {
+    display: none;
+  }
+}
+.userWrapper {
+  display: flex;
+  gap: 14px;
+}

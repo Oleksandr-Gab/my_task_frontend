@@ -1,0 +1,46 @@
+.wrapper {
+  width: 100%;
+  min-height: 61px;
+  background-color: var(--board-sidebar-background);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--sidebar-background);
+  border-radius: 4px;
+  padding: 14px;
+  color: var(--sidebar-text);
+}
+
+.cont_wrap {
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+}
+
+.icon_wrap {
+  display: flex;
+  display: flex;
+  gap: 8px;
+}
+
+.icon {
+  display: flex;
+  cursor: pointer;
+  height: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .icon {
+    height: 18px;
+  }
+}

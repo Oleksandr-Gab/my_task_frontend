@@ -1,0 +1,30 @@
+.sidebar {
+  width: 225px;
+  display: flex;
+  gap: 20px;
+  height: 99vh;
+  flex-direction: column;
+  align-items: start;
+  padding: 14px;
+  background: var(--sidebar-background);
+  justify-content: space-between;
+}
+
+.wrapper {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .sidebar {
+    width: 260px;
+    gap: 24px;
+    padding: 24px;
+  }
+
+  .wrapper {
+    gap: 24px;
+  }
+}

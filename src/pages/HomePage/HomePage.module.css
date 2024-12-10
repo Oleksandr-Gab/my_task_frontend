@@ -1,0 +1,14 @@
+.sidebar {
+  display: none;
+  /* margin-left: 0; */
+}
+
+@media screen and (min-width: 1440px) {
+  .div {
+    display: flex;
+  }
+
+  .sidebar {
+    display: flex;
+  }
+}

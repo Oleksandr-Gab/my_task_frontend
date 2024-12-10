@@ -1,0 +1,28 @@
+/* контейнер */
+.customBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+/* кнопка  Register Now*/
+.customButton {
+  margin-top: 10px !important;
+  color: var(--text-color-start) !important;
+  background-color: var(--btn-color) !important;
+}
+/* desktop 1440px + */
+@media screen and (min-width: 1440px) {
+  .customButton:hover,
+  .customButton:focus {
+    background-color: #9dc888 !important;
+  }
+}
+
+/* кольори для сторінок WelcomePage та AuthPage    
+      --background-start: linear-gradient(180deg, rgba(196, 196, 196, 0) 25%, #BEDBB0 92.19%);
+      --text-color-start: #161616;
+      --text-color-start-white: #FFFFFF;
+      --btn-color: #BEDBB0;
+} */

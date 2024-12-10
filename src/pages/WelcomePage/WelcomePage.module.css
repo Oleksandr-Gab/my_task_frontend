@@ -1,0 +1,103 @@
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+}
+
+.img {
+    width: 124px;
+    height: 124px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 14px
+}
+
+.logoIcon {
+    width: 40px;
+    height: 40px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.5;
+}
+
+.text {
+    max-width: 335px;
+    text-align: center;
+    font-size: 14px;
+    line-height: calc(18/14);
+    margin-top: 24px;
+}
+
+.wrapperBtn {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: calc(21/14);
+    max-width: 335px;
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+}
+
+.btnRegister {
+    width: 100%;
+    background-color: var(--text-color-start);
+    color: var(--text-color-start-white);
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+}
+
+.btnLogin {
+    width: 100%;
+    background: none;
+    border: none;
+}
+
+
+
+
+@media screen and (min-width: 768px) {
+    .wrapper {
+        gap: 24px;
+    }
+
+    .img {
+        width: 162px;
+        height: 162px;
+    }
+
+    .logoIcon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .title {
+        font-size: 40px;
+    }
+    
+    .text {
+        max-width: 473px;
+    }
+    
+    .wrapperBtn {
+        max-width: 344px;
+    }
+    
+}

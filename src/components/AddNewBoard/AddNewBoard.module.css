@@ -1,0 +1,38 @@
+.create {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: var(--sidebar-background);
+  color: var(--text-color);
+  border-top: 1px solid var(--sidebar-lines);
+  border-bottom: 1px solid var(--sidebar-lines);
+  padding-top: 14px;
+  padding-bottom: 14px;
+  margin-bottom: 40px;
+}
+
+.text {
+  height: 42px;
+  width: 76px;
+  font-size: 14px;
+  color: var(--sidebar-text);
+}
+
+.btnPlus {
+  display: flex;
+  cursor: pointer;
+  height: 36px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background-color: var(--color-no-active-element);
+  color: var(--sidebar-text);
+}
+
+.btnPlus:hover {
+  background: var(--color-hover-element);
+  color: var(--color-hover-element);
+}

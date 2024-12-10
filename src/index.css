@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+:root {
+  font-family: 'Poppins';
+  line-height: 1.5;
+  font-weight: 400;
+
+  --label--task-color: #ffffff4d;
+  --label-low-task-color: #8fa1d0;
+  --label-medium-task-color: #e09cb5;
+  --label-high-task-color: #bedbb0;
+
+  /* кольори для сторінок WelcomePage та AuthPage*/
+  --background: linear-gradient(
+    180deg,
+    rgba(196, 196, 196, 0) 25%,
+    #bedbb0 92.19%
+  );
+  --text-color-start: #161616;
+  --text-color-start-white: #ffffff;
+  --btn-color: #bedbb0;
+}
+
+/* Dark Theme */
+[data-theme='dark'] {
+  --background: #1f1f1f;
+  --background-header: #161616;
+  --text-color: #ffffff;
+  --color-no-active-element: #bedbb0;
+  --color-hover-element: #9dc888;
+  --text-input-color-active: #ffffff;
+  --color-icons-no-active: #ffffff80;
+  --color-icons-active: #ffffff;
+  --color-column: #121212;
+
+  --color-icon-back: #ffffff;
+  --color-icon-back-stroke: rgb(0, 0, 0);
+
+  --color-plus-no-active: #bedbb0;
+  --color-plus-active: #9dc888;
+
+  --color-logout: #bedbb0;
+  --color-logout-hover: #9dc888;
+
+  --btn-color: #bedbb0;
+  --btn-color-hover: #9dc888;
+  --text-color-btn: #161616;
+
+  --modal-backgr: #232323;
+
+  --sidebar-background: #121212;
+  --board-sidebar-background: #1f1f1f;
+  --sidebar-text: #ffffff;
+  --heed-help: rgba(31, 31, 31, 1);
+
+  --sidebar-lines: rgba(116, 116, 116, 0.2);
+
+  --icon-plus: #ffffff;
+
+  --logo-color: #1f1f1f;
+
+  --logo-icon-color: #1f1f1f;
+
+  --logo-icon-color: #fafafa;
+}
+
+/* Light Theme */
+[data-theme='light'] {
+  --background: #f6f6f7;
+  --background-header: #fcfcfc;
+  --text-color: #161616;
+  --color-no-active-element: #bedbb0;
+  --color-hover-element: #9dc888;
+  --text-input-color-active: #161616;
+  --color-icons-no-active: #16161680;
+  --color-icons-active: #161616;
+
+  --color-column: #ffffff;
+
+  --color-icon-back: #161616;
+  --color-icon-back-stroke: rgb(255, 255, 255);
+
+  --btnAddColum: #161616;
+
+  --color-plus-no-active: #bedbb0;
+  --color-plus-active: #9dc888;
+
+  --color-logout: #bedbb0;
+  --color-logout-hover: #9dc888;
+
+  --btn-color: #bedbb0;
+  --btn-color-hover: #9dc888;
+  --text-color-btn: #161616;
+
+  --modal-backgr: #ffffff;
+
+  --sidebar-background: #ffffff;
+  --board-sidebar-background: #f6f6f7;
+  --sidebar-text: #161616;
+  --heed-help: rgba(246, 246, 247, 1);
+
+  --sidebar-lines: rgba(18, 18, 18, 0.2);
+
+  --icon-plus: #ffffff;
+
+  --logo-color: #1f1f1f;
+  --logo-icon-color: #1f1f1f;
+  --logo-icon-color: #fafafa;
+}
+
+/* Violet Theme */
+[data-theme='violet'] {
+  --background: #ecedfd;
+  --background-header: #ffffff;
+  --text-color: #161616;
+  --color-no-active-element: #5255bc;
+  --color-hover-element: #7b7ede;
+  --text-input-color-active: #161616;
+  --color-icons-no-active: #16161680;
+  --color-icons-active: #161616;
+
+  --color-column: #ffffff;
+
+  --color-icon-back: #5255bc;
+  --color-icon-back-stroke: rgb(255, 255, 255);
+
+  --btnAddColum: #5255bc;
+
+  --color-plus-no-active: #b8bcfd;
+  --color-plus-active: #979cea;
+
+  --color-logout: #ffffff;
+  --color-logout-hover: #b8bcfd;
+
+  --btn-color: #5255bc;
+  --btn-color-hover: #7b7ede;
+  --text-color-btn: #ffffff;
+
+  --modal-backgr: #fcfcfc;
+
+  --sidebar-background: #5255bc;
+  --board-sidebar-background: #ecedfd66;
+
+  --sidebar-text: #ffffff;
+  --heed-help: rgba(236, 237, 253, 0.4);
+
+  --sidebar-lines: rgba(184, 188, 253, 0.2);
+
+  --icon-plus: #161616;
+
+  --logo-color: #ecedfd;
+
+  --logo-icon-color: #5255bc;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  background: var(--background);
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: auto;
+}

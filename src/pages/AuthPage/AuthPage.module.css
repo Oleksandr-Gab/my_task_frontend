@@ -1,0 +1,61 @@
+/* Загальні стилі */
+.customContainer {
+  background-color: #1f1f1f;
+  margin: 40px auto;
+  padding: 24px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.customTab {
+  color: var(--text-color-start-white) !important;
+  opacity: 0.3;
+  text-transform: capitalize !important;
+  padding: 0 !important;
+}
+
+.customSelectedTab {
+  color: var(--text-color-start-white);
+  opacity: 1;
+}
+.customTabsIndicator {
+  display: none;
+}
+
+/* гумова від 320px - mobile */
+@media screen and (min-width: 320px) {
+  .customContainer {
+    width: 90%;
+  }
+}
+
+/* стає адаптивною з mobile 375px + */
+@media screen and (min-width: 375px) {
+  .customContainer {
+    width: 335px;
+  }
+}
+/* tablet 768px + */
+@media screen and (min-width: 768px) {
+  .customContainer {
+    width: 424px;
+    padding: 40px;
+  }
+}
+
+/* desktop 1440px + */
+@media screen and (min-width: 1440px) {
+}
+
+/* Точки перелому:
+- гумова від 320 - mobile
+- mobile: верстка гумова, стає адаптивною з 375px;
+- tablet: з 768px;
+- desktop: з 1440px */
+
+/* кольори для сторінок WelcomePage та AuthPage      
+  --background-start: linear-gradient(180deg, rgba(196, 196, 196, 0) 25%, #BEDBB0 92.19%);
+  --text-color-start: #161616;
+  --text-color-start-white: #FFFFFF;
+  --btn-color: #BEDBB0;
+*/

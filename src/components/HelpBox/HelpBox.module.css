@@ -1,0 +1,52 @@
+.helpBox {
+  display: flex;
+  gap: 14px;
+  flex-direction: column;
+  padding: 14px;
+  background: var(--heed-help);
+  color: var(--text-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.helpBox a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--sidebar-text);
+}
+
+.helpImg {
+  width: 54px;
+}
+
+.helpBox p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--sidebar-text);
+}
+
+.helpBox p span {
+  color: var(--btn-color);
+}
+
+.helpBox button {
+  padding: 10px 20px;
+  color: var(--text-color-btn);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.helpBox button:hover {
+  background-color: #0056b3;
+}
+
+@media screen and (min-width: 768px) {
+  .helpBox {
+    padding: 20px;
+  }
+  .helpBox p {
+    font-size: 14px;
+  }
+}

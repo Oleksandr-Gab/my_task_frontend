@@ -1,0 +1,22 @@
+.editProfileButton {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  color: var(--text-input-color-active);
+}
+.userName {
+  color: var(--text-input-color-active);
+  font-size: 14px;
+}
+
+.userAvatar {
+  width: 32px;
+  height: 32px;
+  background-image: var(--background-image);
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+}

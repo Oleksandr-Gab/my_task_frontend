@@ -1,0 +1,197 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 334px;
+    height: 154px;
+    gap: 0px;
+    margin-bottom: 8px;
+    border-left: 4px solid;
+    border-radius: 8px;
+    background-color: var(--color-column);
+}
+.card-without {
+    border-left-color: var( --label--task-color);
+}
+.card-low {
+    border-left-color: var( --label-low-task-color);
+}
+.card-medium {
+    border-left-color: var( --label-medium-task-color);
+}
+.card-high {
+    border-left-color: var( --label-high-task-color);
+}
+.title {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    margin-top: 14px;
+    margin-left: 20px;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+.description {
+    max-width: 290px;
+    display: block;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    line-height: 16px;
+    margin-left: 20px;
+    color: var(--text-color);
+    opacity: 0.5;
+    
+}
+.cardDivider {
+    display: flex;
+    width: 290px;
+    height: 1px;
+    background-color: var(--text-color); 
+    opacity: 0.1;
+    margin: 14px 20px; 
+  }
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+   margin-bottom: 14px;
+}
+.priority {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+.priorityTitle {
+    font-size: 8px;
+    line-height: 12px;
+    color: var(--text-color);
+    opacity: 0.5;
+    margin-bottom: 4px;
+}
+.priorityType {
+    display: flex;
+
+}
+.priorityValue {
+font-size: 10px;
+font-weight: 400;
+line-height: 15px;
+color: var(--text-color);
+}
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 4px; 
+}
+.dot-without {
+    background-color: var(--label--task-color);
+}
+.dot-low {
+    background-color: var(--label-low-task-color);
+}
+.dot-medium {
+    background-color: var(--label-medium-task-color);
+}
+.dot-high {
+    background-color: var(--label-high-task-color);
+}
+.deadline {
+    display: flex;
+    flex-direction: column;
+}
+.deadlineTitle {
+    font-size: 8px;
+    line-height: 12px;
+    color: var(--text-color);
+    opacity: 0.5;
+    margin-bottom: 4px; 
+}
+.deadlineValue {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 15px;
+    color: var(--text-color);  
+}
+.icons {
+    display: flex;
+    gap: 8px;
+    margin-right: 20px;
+    position: relative;
+}
+.logoIcon {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: var(--text-color);
+    opacity: 0.5;
+    stroke-width: 2.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 4;
+  }
+  .logoIcon:hover {
+    stroke: var(--btn-color);
+    opacity: 1;
+  }
+.btnCard {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: auto;
+   
+  }
+ 
+  .popup {
+  width: 135x;
+  position: absolute;
+  top: 150%;
+  background-color: var(--modal-backgr);
+  padding: 18px;
+  border: 1px solid var(--text-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  transform: translateX(-70px);
+  transition: opacity 0.3s, visibility 0.3s;
+  }
+ 
+  .popTitle {
+    line-height: 21px;
+    color: var(--text-color);
+  }
+  .popIcon {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: var(--text-color);
+    stroke-width: 2.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 4;
+  }
+  .popBox {
+    width: 99px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 8px;
+  }
+
+  .popBox:hover .popTitle,
+  .popBox:hover .popIcon {
+    color: var(--btn-color);
+    stroke: var(--btn-color)
+  }

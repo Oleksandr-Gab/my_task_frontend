@@ -1,0 +1,88 @@
+.headerDashboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: transparent;
+  padding: 10px 20px;
+}
+h1 {
+  font-size: 18px;
+  color: var(--text-color);
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  color: var(--text-color);
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.filterButton:hover {
+  color: var(--color-logout);
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
+  max-width: 300px; /* Максимальна ширина модального вікна */
+  width: 100%;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* Прозорість затемнення фону */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  margin: auto; /* Центрування вмісту в модальному вікні */
+  text-align: center;
+}
+
+.modal h2 {
+  margin-bottom: 16px;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal input[type='color'] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal button {
+  align-self: flex-end;
+  background-color: var(--color-logout);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.modal button:hover {
+  background-color: var(--color-logout-hover);
+}

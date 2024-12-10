@@ -1,0 +1,17 @@
+.selectes {
+  background: none;
+  color: var(--text-input-color-active);
+  border: 2px solid var(--background-header);
+  padding: 5px;
+}
+
+.selectes:focus {
+  border: 2px solid var(--background-header);
+}
+
+.select {
+  border: none;
+  font-family: 'Poppins';
+  background: var(--color-column);
+  border: 2px solid var(--background-header);
+}

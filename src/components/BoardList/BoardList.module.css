@@ -1,0 +1,19 @@
+.wrapper {
+  width: 100%;
+}
+
+.list {
+  width: 100%;
+  height: calc(100vh - 560px);
+  overflow: auto; /* Добавляем прокрутку */
+  scrollbar-width: auto; /* Ширина полосы прокрутки (thin, auto, none) */
+}
+
+.title {
+  font-family: Poppins;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+  color: var(--color-icons-no-active);
+  margin-bottom: 8px;
+}

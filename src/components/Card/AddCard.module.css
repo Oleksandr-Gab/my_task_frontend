@@ -1,0 +1,115 @@
+/* AddCard.module.css */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #151515;
+  color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+  outline: none;
+  position: relative;
+}
+
+.modal h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.input,
+.textarea,
+input[type='datetime-local'] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #202020;
+  color: #fff;
+}
+
+.textarea {
+  height: 80px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+label > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+input[type='radio'] {
+  margin-right: 5px;
+}
+
+.radioLabel {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+button[type='submit'],
+button {
+  background-color: #bedbb0;
+  color: #151515;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type='submit']:hover,
+button:hover {
+  background-color: #a8c79b;
+}
+
+.spanClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.closeSvg {
+  width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: var(--text-color);
+    opacity: 0.5;
+    stroke-width: 2.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 4;
+}
+
+
+
+
+.btnCard {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: auto;
+ 
+}
