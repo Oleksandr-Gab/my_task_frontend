@@ -42,7 +42,7 @@ export default function App() {
       <Suspense fallback={<IsRefreshingComponent />}>
         <Routes>
           <Route
-            path="/"
+            path="/welcome"
             element={<RestrictedRoute component={<WelcomePage />} />}
           />
           <Route
@@ -66,7 +66,9 @@ export default function App() {
           />
           <Route
             path="/home/:boardId"
-            element={<PrivateRoute component={<HomePage />} redirectTo="/" />}
+            element={
+              <PrivateRoute component={<HomePage />} redirectTo="/welcome" />
+            }
           >
             <Route path="boardId" element={<ScreensPage />} />
           </Route>
