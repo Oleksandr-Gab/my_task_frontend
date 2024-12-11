@@ -32,7 +32,7 @@ export default function ScreensPage() {
   }, [isRowMobile, isRowTable]);
 
   const backgroundImg = {
-    backgroundImage: `url(../../../img/${devise}-${board.background}.jpg)`,
+    backgroundImage: `url('../../img/${devise}-${board.background}.jpg')`,
   };
 
   return (

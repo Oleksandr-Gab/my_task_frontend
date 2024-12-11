@@ -32,11 +32,11 @@ export default function ColumnItem({ id, boardId, title, owner, idBoard }) {
   let [oneBoardId, setoneBoardId] = useState(boardId);
   const areyRef = useRef(false);
 
-  useEffect(() => {
-    if (areyRef.current) return;
-    areyRef.current = true;
-    dispatch(fetchCards(id));
-  }, [dispatch, id]);
+  // useEffect(() => {
+  //   if (areyRef.current) return;
+  //   areyRef.current = true;
+  //   dispatch(fetchCards(id));
+  // }, [dispatch, id]);
 
   const cards = useSelector(selectCards);
 

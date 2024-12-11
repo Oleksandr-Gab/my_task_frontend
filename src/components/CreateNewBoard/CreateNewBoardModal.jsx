@@ -15,6 +15,7 @@ import Radio from '@mui/material/Radio';
 import { addBoard, fetchBoards } from '../../redux/boards/operations';
 import BackgroundSelector from '../BackgroundSelector/BackgroundSelector'; // Импорт компонента BackgroundSelector
 import Icon from '../Icon/Icon.jsx';
+import CreateButton from '../CreateButton/CreateButton';
 
 const style = {
   position: 'absolute',
@@ -27,6 +28,10 @@ const style = {
   borderRadius: '8px',
   boxShadow: 24,
   p: 4,
+};
+
+const hel = () => {
+  console.log('hello');
 };
 
 const CreateNewBoardModal = ({ show, onClose, title }) => {
@@ -118,6 +123,7 @@ const CreateNewBoardModal = ({ show, onClose, title }) => {
               value={selectedIcon}
               onChange={e => setSelectedIcon(e.target.value)}
               sx={{
+                height: '18px',
                 marginLeft: '10px',
                 marginTop: '10px',
               }}
@@ -143,7 +149,6 @@ const CreateNewBoardModal = ({ show, onClose, title }) => {
                           selectedIcon === iconId
                             ? 'var(--color-icons-active)'
                             : 'var(--color-icons-no-active)',
-                        // fill: 'none',
                         width: '18px',
                         height: '18px',
                       }}
@@ -185,6 +190,7 @@ const CreateNewBoardModal = ({ show, onClose, title }) => {
           >
             Create
           </Button>
+          {/* <CreateButton onSubmit={handleSubmit}>Create</CreateButton> */}
         </Box>
       </Box>
     </Modal>
