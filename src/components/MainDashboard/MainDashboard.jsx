@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createColumn, deleteColumn } from '../../redux/columns/slice';
+import { createColumn } from '../../redux/columns/slice';
 import Modal from 'react-modal';
 import css from './MainDashboard.module.css';
 import {
@@ -8,8 +8,7 @@ import {
   selectLoading,
   selectError,
 } from '../../redux/columns/selectors';
-import toast, { Toaster } from 'react-hot-toast';
-import sprite from '../../assets/sprite.svg';
+
 import ColumnItem from '../ColumnItem/ColumnItem';
 import { selectBoards, selectOneBoard } from '../../redux/boards/selectors';
 import { fetchColumns } from '../../redux/columns/operations';
@@ -17,49 +16,35 @@ import { FiX } from 'react-icons/fi';
 
 import BeatLoader from 'react-spinners/BeatLoader';
 
-import { getBoard } from '../../redux/boards/operations';
+// import { getBoard } from '../../redux/boards/operations';
 
 Modal.setAppElement('#root');
 
 export default function MainDashboard() {
   const dispatch = useDispatch();
-  const [idBoard, setIdBoat] = useState('');
-
-  const board = useSelector(selectOneBoard);
-  const boards = useSelector(selectBoards);
-
+  // const [idBoard, setIdBoat] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newColumnTitle, setNewColumnTitle] = useState('');
 
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
-
+  const board = useSelector(selectOneBoard);
   const columns = useSelector(selectColumnsData);
 
   useEffect(() => {
-    Object.keys(board).length == 0
-      ? setIdBoat(boards[0]._id)
-      : setIdBoat(board._id);
-  }, [boards, board]);
-
-  if (idBoard === '') {
-    setIdBoat(boards[0]._id);
-  }
-
-  useEffect(() => {
-    dispatch(fetchColumns(idBoard));
-  }, [dispatch, idBoard]);
+    dispatch(fetchColumns(board._id));
+  }, [dispatch, board._id]);
 
   const handleAddColumn = e => {
     e.preventDefault();
 
     let newObj = {
-      boardId: idBoard,
+      boardId: board._id,
       title: newColumnTitle,
     };
 
     dispatch(createColumn(newObj));
-    dispatch(fetchColumns(idBoard));
+    dispatch(fetchColumns(board._id));
     setIsModalOpen(false);
   };
 
@@ -80,7 +65,7 @@ export default function MainDashboard() {
                     boardId={item.board}
                     owner={item.owner}
                     title={item.title}
-                    idBoard={idBoard}
+                    idBoard={board._id}
                   />
                 </li>
               );
@@ -91,22 +76,7 @@ export default function MainDashboard() {
           className={css.buttonAddColumn}
           onClick={() => setIsModalOpen(true)}
         >
-          <svg className={css.logoIcon} viewBox="0 0 32 32">
-            <rect
-              className={css.iconBackground}
-              width="28"
-              height="28"
-              rx="6"
-              ry="6"
-            />
-            <use
-              href={sprite + '#icon-plus'}
-              x="7"
-              y="7"
-              width="14"
-              height="14"
-            />
-          </svg>
+          <div className={css.logoIcon}>+</div>
           Add another column
         </button>
       </div>

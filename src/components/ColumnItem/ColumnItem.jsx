@@ -30,7 +30,7 @@ export default function ColumnItem({ id, boardId, title, owner, idBoard }) {
   let [isModalAddCardOpen, setIsModalAddCardOpen] = useState(false);
   const [newColumnTitle, setNewColumnTitle] = useState('');
   let [oneBoardId, setoneBoardId] = useState(boardId);
-  const areyRef = useRef(false);
+  // const areyRef = useRef(false);
 
   // useEffect(() => {
   //   if (areyRef.current) return;

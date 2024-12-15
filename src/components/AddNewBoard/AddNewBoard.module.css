@@ -28,13 +28,13 @@
   justify-content: center;
   align-items: center;
   border-radius: 6px;
-  background-color: var(--color-no-active-element);
-  color: var(--sidebar-text);
+  color: var(--color-icon-back-stroke);
+  background-color: var(--color-plus-no-active);
 }
 
 .btnPlus:hover {
   background: var(--color-hover-element);
-  color: var(--color-hover-element);
+  /* color: var(--color-hover-element); */
 }
 
 @media screen and (min-width: 768px) {

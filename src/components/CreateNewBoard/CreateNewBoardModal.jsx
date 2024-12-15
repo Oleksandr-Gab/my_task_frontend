@@ -15,7 +15,7 @@ import Radio from '@mui/material/Radio';
 import { addBoard, fetchBoards } from '../../redux/boards/operations';
 import BackgroundSelector from '../BackgroundSelector/BackgroundSelector'; // Импорт компонента BackgroundSelector
 import Icon from '../Icon/Icon.jsx';
-import CreateButton from '../CreateButton/CreateButton';
+// import CreateButton from '../CreateButton/CreateButton';
 
 const style = {
   position: 'absolute',
@@ -30,40 +30,54 @@ const style = {
   p: 4,
 };
 
-const hel = () => {
-  console.log('hello');
-};
-
 const CreateNewBoardModal = ({ show, onClose, title }) => {
   const dispatch = useDispatch();
   const [boardTitle, setBoardTitle] = useState('');
   const [selectedIcon, setSelectedIcon] = useState('project');
-  const [selectedBackground, setSelectedBackground] = useState('1');
+  const [selectedBackground, setSelectedBackground] = useState('0');
   const [error, setError] = useState('');
 
-  const handleSubmit = async e => {
+  // const handleSubmit = async e => {
+  //   e.preventDefault();
+  //   if (!boardTitle.trim()) {
+  //     setError('Title is required');
+  //     return;
+  //   }
+
+  //   try {
+  //     await dispatch(
+  //       addBoard({
+  //         title: boardTitle,
+  //         icon: selectedIcon,
+  //         background: selectedBackground,
+  //       })
+  //     ).unwrap();
+  //     onClose(); // Закрываем модальное окно после успешного создания
+  //     dispatch(fetchBoards()); // Обновляем список досок после создания
+  //   } catch (error) {
+  //     console.error('Failed to create new board:', error);
+  //     setError('Failed to create new board');
+  //   } finally {
+  //     setBoardTitle('');
+  //   }
+  // };
+
+  const handleSubmit = e => {
     e.preventDefault();
     if (!boardTitle.trim()) {
       setError('Title is required');
       return;
     }
 
-    try {
-      await dispatch(
-        addBoard({
-          title: boardTitle,
-          icon: selectedIcon,
-          background: selectedBackground,
-        })
-      ).unwrap();
-      onClose(); // Закрываем модальное окно после успешного создания
-      dispatch(fetchBoards()); // Обновляем список досок после создания
-    } catch (error) {
-      console.error('Failed to create new board:', error);
-      setError('Failed to create new board');
-    } finally {
-      setBoardTitle('');
-    }
+    let newBoard = {
+      title: boardTitle,
+      icon: selectedIcon,
+      background: selectedBackground,
+    };
+
+    dispatch(addBoard(newBoard));
+    dispatch(fetchBoards());
+    onClose();
   };
 
   return (
@@ -149,8 +163,8 @@ const CreateNewBoardModal = ({ show, onClose, title }) => {
                           selectedIcon === iconId
                             ? 'var(--color-icons-active)'
                             : 'var(--color-icons-no-active)',
-                        width: '18px',
-                        height: '18px',
+                        width: '16px',
+                        height: '16px',
                       }}
                     >
                       <Icon id={iconId} />

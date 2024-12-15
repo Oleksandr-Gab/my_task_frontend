@@ -9,19 +9,17 @@ import { useSelector } from 'react-redux';
 import BlankBoard from '../../components/BlankBoard/BlankBoard';
 
 export default function ScreensPage() {
-  const [titleBoard, setTitleBoard] = useState('');
   const [devise, setDevise] = useState('');
   const isRowMobile = useMediaQuery('(max-width: 768px)');
   const isRowTable = useMediaQuery('(max-width: 1440px)');
-
-  const board = useSelector(selectOneBoard);
   const boards = useSelector(selectBoards);
+  const board = useSelector(selectOneBoard);
 
   useEffect(() => {
-    setTitleBoard(board.title);
-  }, [board]);
-
-  useEffect(() => {
+    if (boards.length == 0) {
+      setDevise('');
+      return;
+    }
     if (isRowMobile) {
       setDevise('Mobile');
     } else if (isRowTable) {
@@ -29,15 +27,15 @@ export default function ScreensPage() {
     } else {
       setDevise('Desktop');
     }
-  }, [isRowMobile, isRowTable]);
+  }, [isRowMobile, isRowTable, boards]);
 
   const backgroundImg = {
-    backgroundImage: `url('../../img/${devise}-${board.background}.jpg')`,
+    backgroundImage: `url('../../../img/${devise}-${board.background}.jpg')`,
   };
 
   return (
     <div className={css.screensPage} style={backgroundImg}>
-      <HeaderDashboard boardName={titleBoard} />
+      <HeaderDashboard />
       {boards.length != 0 ? <MainDashboard /> : <BlankBoard />}
     </div>
   );

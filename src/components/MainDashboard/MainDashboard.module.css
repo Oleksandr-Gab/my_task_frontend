@@ -9,7 +9,6 @@
 }
 
 .buttonAddColumn {
-  margin-left: 20px;
   display: flex;
   flex-direction: row;
   height: 56px;
@@ -32,18 +31,14 @@
 }
 
 .logoIcon {
+  display: flex;
   width: 28px;
   height: 28px;
-  fill: none;
-  stroke: var(--color-icon-back-stroke);
-  stroke-width: 2.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-miterlimit: 4;
-}
-
-.iconBackground {
-  fill: var(--color-icon-back);
+  color: var(--color-icon-back-stroke);
+  background-color: var(--color-icon-back);
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
 }
 
 .logoIconCard {

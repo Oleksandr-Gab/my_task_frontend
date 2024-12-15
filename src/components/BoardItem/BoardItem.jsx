@@ -21,8 +21,12 @@ const BoardItem = ({ board }) => {
   };
 
   const handleDelete = async _id => {
-    dispatch(deleteBoard(_id));
-    dispatch(fetchBoards());
+    await dispatch(deleteBoard(_id));
+    try {
+      dispatch(fetchBoards());
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleEditModalOpen = () => {
