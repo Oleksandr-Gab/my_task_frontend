@@ -23,22 +23,22 @@ import toast from 'react-hot-toast';
 import { FiX } from 'react-icons/fi';
 import Icon from '../Icon/Icon';
 
-export default function ColumnItem({ id, boardId, title, owner, idBoard }) {
+export default function ColumnItem({ id, boardId, title, idBoard }) {
   const dispatch = useDispatch();
   const [idColumn, setIdColumn] = useState(id);
   let [isModalOpen, setIsModalOpen] = useState(false);
   let [isModalAddCardOpen, setIsModalAddCardOpen] = useState(false);
-  const [newColumnTitle, setNewColumnTitle] = useState('');
+  const [columnTitle, setColumnTitle] = useState(title);
   let [oneBoardId, setoneBoardId] = useState(boardId);
-  // const areyRef = useRef(false);
 
   // useEffect(() => {
-  //   if (areyRef.current) return;
-  //   areyRef.current = true;
   //   dispatch(fetchCards(id));
   // }, [dispatch, id]);
 
   const cards = useSelector(selectCards);
+  const columns = useSelector(selectColumnsData);
+
+  // console.log(columns);
 
   const columnCards = useMemo(() => {
     const filteredCards = cards.filter(card => card.column === idColumn);
@@ -56,7 +56,7 @@ export default function ColumnItem({ id, boardId, title, owner, idBoard }) {
     let newObj = {
       columnId: idColumn,
       editColumn: {
-        title: newColumnTitle,
+        title: columnTitle,
       },
     };
 
@@ -144,8 +144,8 @@ export default function ColumnItem({ id, boardId, title, owner, idBoard }) {
             >
               <input
                 type="text"
-                value={newColumnTitle}
-                onChange={e => setNewColumnTitle(e.target.value)}
+                value={columnTitle}
+                onChange={e => setColumnTitle(e.target.value)}
                 placeholder="Column title"
                 className={css.modalInput}
               />

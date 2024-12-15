@@ -11,8 +11,8 @@ import { logOut } from '../auth/operations';
 const boardSlice = createSlice({
   name: 'boards',
   initialState: {
-    item: {},
-    items: [],
+    boards: [],
+    oneBoard: {},
     loading: false,
     error: false,
   },
@@ -24,7 +24,7 @@ const boardSlice = createSlice({
       })
       .addCase(fetchBoards.fulfilled, (state, action) => {
         state.loading = false;
-        state.items = action.payload;
+        state.boards = action.payload;
       })
       .addCase(fetchBoards.rejected, state => {
         state.loading = false;
@@ -35,8 +35,8 @@ const boardSlice = createSlice({
         state.error = false;
       })
       .addCase(getBoard.fulfilled, (state, action) => {
+        state.oneBoard = action.payload;
         state.loading = false;
-        state.item = action.payload;
       })
       .addCase(getBoard.rejected, state => {
         state.loading = false;
@@ -48,7 +48,9 @@ const boardSlice = createSlice({
       })
       .addCase(deleteBoard.fulfilled, (state, action) => {
         state.loading = false;
-        state.items = state.items.filter(item => item.id !== action.payload.id);
+        state.boards = state.boards.filter(
+          board => board.id !== action.payload.id
+        );
       })
       .addCase(deleteBoard.rejected, state => {
         state.loading = false;
@@ -59,8 +61,9 @@ const boardSlice = createSlice({
         state.error = false;
       })
       .addCase(addBoard.fulfilled, (state, action) => {
+        state.boards.push(action.payload);
         state.loading = false;
-        state.items.push(action.payload);
+        state.error = false;
       })
       .addCase(addBoard.rejected, state => {
         state.loading = false;
@@ -71,22 +74,18 @@ const boardSlice = createSlice({
         state.error = false;
       })
       .addCase(editBoard.fulfilled, (state, action) => {
-        console.log(action.payload.board);
-        const boardIndex = state.items.findIndex(
+        const boardIndex = state.boards.findIndex(
           item => item.id === action.payload.id
         );
         // -1 ??????????? -------------------------------------------------
-        if (boardIndex === -1) {
-          return toast.error('Board not found.', { duration: 2000 });
-        }
-        state.items[boardIndex] = action.payload.board;
+        state.boards[boardIndex] = action.payload.board;
       })
       .addCase(editBoard.rejected, state => {
         state.loading = false;
         state.error = true;
       })
       .addCase(logOut.fulfilled, state => {
-        state.items = [];
+        state.boards = [];
         state.loading = false;
         state.error = false;
       }),

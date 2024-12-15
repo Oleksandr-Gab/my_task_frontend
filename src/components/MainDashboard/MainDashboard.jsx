@@ -6,34 +6,33 @@ import css from './MainDashboard.module.css';
 import {
   selectColumnsData,
   selectLoading,
-  selectError,
 } from '../../redux/columns/selectors';
 
 import ColumnItem from '../ColumnItem/ColumnItem';
-import { selectBoards, selectOneBoard } from '../../redux/boards/selectors';
+import { selectOneBoard } from '../../redux/boards/selectors';
 import { fetchColumns } from '../../redux/columns/operations';
 import { FiX } from 'react-icons/fi';
 
 import BeatLoader from 'react-spinners/BeatLoader';
 
-// import { getBoard } from '../../redux/boards/operations';
-
 Modal.setAppElement('#root');
 
 export default function MainDashboard() {
   const dispatch = useDispatch();
-  // const [idBoard, setIdBoat] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newColumnTitle, setNewColumnTitle] = useState('');
 
   const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+  // const error = useSelector(selectError);
   const board = useSelector(selectOneBoard);
   const columns = useSelector(selectColumnsData);
 
   useEffect(() => {
     dispatch(fetchColumns(board._id));
-  }, [dispatch, board._id]);
+  }, [dispatch, board]);
+
+  // console.log(columns);
+  // console.log(loading);
 
   const handleAddColumn = e => {
     e.preventDefault();
@@ -57,19 +56,20 @@ export default function MainDashboard() {
           </div>
         ) : (
           <ul className={css.columnList}>
-            {columns.map(item => {
-              return (
-                <li className={css.columnItem} key={item._id}>
-                  <ColumnItem
-                    id={item._id}
-                    boardId={item.board}
-                    owner={item.owner}
-                    title={item.title}
-                    idBoard={board._id}
-                  />
-                </li>
-              );
-            })}
+            {columns.length !== 0 &&
+              columns.map(item => {
+                return (
+                  <li className={css.columnItem} key={item._id}>
+                    <ColumnItem
+                      id={item._id}
+                      boardId={item.board}
+                      owner={item.owner}
+                      title={item.title}
+                      idBoard={board._id}
+                    />
+                  </li>
+                );
+              })}
           </ul>
         )}
         <button

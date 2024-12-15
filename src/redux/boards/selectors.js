@@ -1,9 +1,9 @@
 import { selectValueFilter } from '../filters/selectors';
 import { createSelector } from '@reduxjs/toolkit';
 
-export const selectBoards = state => state.boards.items;
+export const selectBoards = state => state.boards.boards;
 
-export const selectOneBoard = state => state.boards.item;
+export const selectOneBoard = state => state.boards.oneBoard;
 
 // ---------------------------------------------------------
 // board.priority - значення пріорітету задачі

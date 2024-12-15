@@ -48,7 +48,6 @@ export const createColumn = createAsyncThunk(
   async (newColumn, thunkAPI) => {
     try {
       const response = await axios.post('/api/columns/', newColumn);
-      console.log(response.data);
       return response.data.column;
     } catch (error) {
       return thunkAPI.rejectWithValue({

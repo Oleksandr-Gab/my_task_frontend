@@ -7,15 +7,9 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Radio from '@mui/material/Radio';
 import { addBoard, fetchBoards } from '../../redux/boards/operations';
 import BackgroundSelector from '../BackgroundSelector/BackgroundSelector'; // Импорт компонента BackgroundSelector
-import Icon from '../Icon/Icon.jsx';
-// import CreateButton from '../CreateButton/CreateButton';
+import IconSelector from '../IconSelector/IconSelector';
 
 const style = {
   position: 'absolute',
@@ -36,31 +30,6 @@ const CreateNewBoardModal = ({ show, onClose, title }) => {
   const [selectedIcon, setSelectedIcon] = useState('project');
   const [selectedBackground, setSelectedBackground] = useState('0');
   const [error, setError] = useState('');
-
-  // const handleSubmit = async e => {
-  //   e.preventDefault();
-  //   if (!boardTitle.trim()) {
-  //     setError('Title is required');
-  //     return;
-  //   }
-
-  //   try {
-  //     await dispatch(
-  //       addBoard({
-  //         title: boardTitle,
-  //         icon: selectedIcon,
-  //         background: selectedBackground,
-  //       })
-  //     ).unwrap();
-  //     onClose(); // Закрываем модальное окно после успешного создания
-  //     dispatch(fetchBoards()); // Обновляем список досок после создания
-  //   } catch (error) {
-  //     console.error('Failed to create new board:', error);
-  //     setError('Failed to create new board');
-  //   } finally {
-  //     setBoardTitle('');
-  //   }
-  // };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -128,52 +97,11 @@ const CreateNewBoardModal = ({ show, onClose, title }) => {
               borderRadius: '8px',
             }} // Установка цвета текста для TextField
           />
-          <FormControl component="fieldset" sx={{ mt: 2 }}>
-            <FormLabel component="legend" sx={{ color: 'var(--text-color)' }}>
-              Choose an Icon
-            </FormLabel>
-            <RadioGroup
-              row
-              value={selectedIcon}
-              onChange={e => setSelectedIcon(e.target.value)}
-              sx={{
-                height: '18px',
-                marginLeft: '10px',
-                marginTop: '10px',
-              }}
-            >
-              {[
-                'project',
-                'star-04',
-                'loading-03',
-                'puzzle-piece-02',
-                'container',
-                'lightning-02',
-                'colors',
-                'hexagon-01',
-              ].map(iconId => (
-                <FormControlLabel
-                  key={iconId}
-                  value={iconId}
-                  control={<Radio style={{ display: 'none' }} />}
-                  label={
-                    <div
-                      style={{
-                        color:
-                          selectedIcon === iconId
-                            ? 'var(--color-icons-active)'
-                            : 'var(--color-icons-no-active)',
-                        width: '16px',
-                        height: '16px',
-                      }}
-                    >
-                      <Icon id={iconId} />
-                    </div>
-                  }
-                />
-              ))}
-            </RadioGroup>
-          </FormControl>
+
+          <IconSelector
+            selectedIcon={selectedIcon}
+            setSelectedIcon={setSelectedIcon}
+          />
 
           <BackgroundSelector
             setSelectedBackground={setSelectedBackground}

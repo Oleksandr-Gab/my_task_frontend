@@ -12,9 +12,9 @@ import css from './BoardItem.module.css';
 import Icon from '../Icon/Icon';
 
 const BoardItem = ({ board }) => {
-  const dispatch = useDispatch();
-
   const [editModalOpen, setEditModalOpen] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleBoardId = idBoard => {
     dispatch(getBoard(idBoard));

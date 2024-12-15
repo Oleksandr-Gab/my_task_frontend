@@ -1,23 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 import {
   fetchColumns,
   getColumn,
   createColumn,
   deleteColumn,
   editColumn,
-} from "./operations";
-import { logOut } from "../auth/operations";
+} from './operations';
+import { logOut } from '../auth/operations';
 
 const columnSlice = createSlice({
-  name: "columns",
+  name: 'columns',
   initialState: {
     items: [],
     loading: false,
     error: false,
   },
-  extraReducers: (builder) =>
+  extraReducers: builder =>
     builder
-      .addCase(fetchColumns.pending, (state) => {
+      .addCase(fetchColumns.pending, state => {
         state.loading = true;
         state.error = false;
       })
@@ -25,11 +25,11 @@ const columnSlice = createSlice({
         state.loading = false;
         state.items = action.payload;
       })
-      .addCase(fetchColumns.rejected, (state) => {
+      .addCase(fetchColumns.rejected, state => {
         state.loading = false;
         state.error = true;
       })
-      .addCase(getColumn.pending, (state) => {
+      .addCase(getColumn.pending, state => {
         state.loading = true;
         state.error = false;
       })
@@ -37,54 +37,53 @@ const columnSlice = createSlice({
         state.loading = false;
         state.items = action.payload;
       })
-      .addCase(getColumn.rejected, (state) => {
+      .addCase(getColumn.rejected, state => {
         state.loading = false;
         state.error = true;
       })
-      .addCase(createColumn.pending, (state) => {
+      .addCase(createColumn.pending, state => {
         state.loading = true;
         state.error = false;
       })
       .addCase(createColumn.fulfilled, (state, action) => {
         state.loading = false;
-        console.log(action.payload);
         state.items.push(action.payload);
       })
-      .addCase(createColumn.rejected, (state) => {
+      .addCase(createColumn.rejected, state => {
         state.loading = false;
         state.error = true;
       })
-      .addCase(deleteColumn.pending, (state) => {
+      .addCase(deleteColumn.pending, state => {
         state.loading = true;
         state.error = false;
       })
       .addCase(deleteColumn.fulfilled, (state, action) => {
         state.loading = false;
         state.items = state.items.filter(
-          (item) => item._id !== action.payload._id
+          item => item._id !== action.payload._id
         );
       })
-      .addCase(deleteColumn.rejected, (state) => {
+      .addCase(deleteColumn.rejected, state => {
         state.loading = false;
         state.error = true;
       })
-      .addCase(editColumn.pending, (state) => {
+      .addCase(editColumn.pending, state => {
         state.loading = true;
         state.error = false;
       })
       .addCase(editColumn.fulfilled, (state, action) => {
         const columnIndex = state.items.findIndex(
-          (item) => item._id === action.payload._id
+          item => item._id === action.payload._id
         );
         if (columnIndex !== -1) {
           state.items[columnIndex] = action.payload;
         }
       })
-      .addCase(editColumn.rejected, (state) => {
+      .addCase(editColumn.rejected, state => {
         state.loading = false;
         state.error = true;
       })
-      .addCase(logOut.fulfilled, (state) => {
+      .addCase(logOut.fulfilled, state => {
         state.items = [];
         state.loading = false;
         state.error = false;
