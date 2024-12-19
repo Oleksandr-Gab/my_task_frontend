@@ -1,4 +1,8 @@
-import { selectBoards } from '../../redux/boards/selectors';
+import {
+  selectBoards,
+  selectError,
+  selectLoading,
+} from '../../redux/boards/selectors';
 import { useSelector } from 'react-redux';
 
 import BeatLoader from 'react-spinners/BeatLoader';
@@ -9,8 +13,8 @@ import BoardItem from '../BoardItem/BoardItem';
 import css from './BoardList.module.css';
 
 const BoardList = () => {
-  const isLoading = useSelector(state => state.boards.loading);
-  const error = useSelector(state => state.boards.error);
+  const isLoading = useSelector(selectLoading);
+  const error = useSelector(selectError);
   const boards = useSelector(selectBoards);
 
   if (!Array.isArray(boards)) {

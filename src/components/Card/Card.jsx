@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import EditCard from './EditCard.jsx';
 import { useState } from 'react';
 import {
@@ -7,9 +6,9 @@ import {
   deleteCard,
 } from '../../redux/cards/operations.js';
 import { useDispatch, useSelector } from 'react-redux';
-import sprite from '../../assets/sprite.svg';
 import css from './Card.module.css';
 import { selectColumnsData } from '../../redux/columns/selectors.js';
+import Icon from '../Icon/Icon.jsx';
 
 const formatDate = dateString => {
   const date = new Date(dateString);
@@ -21,7 +20,6 @@ const formatDate = dateString => {
 export default function Card({
   id,
   columnId,
-  boardId,
   title,
   description,
   priority,
@@ -29,9 +27,6 @@ export default function Card({
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  const [oneColumnId, setOneColumnId] = useState(columnId);
-
   const columns = useSelector(selectColumnsData);
   const dispatch = useDispatch();
 
@@ -120,16 +115,12 @@ export default function Card({
         <div className={css.icons} onMouseLeave={handleMouseLeave}>
           {isDeadlineDay && (
             <button className={css.btnCard}>
-              <svg className={css.logoIcon}>
-                <use href={`${sprite}#bell`}></use>
-              </svg>
+              <Icon id={'bell'} />
             </button>
           )}
 
           <button className={css.btnCard} onMouseEnter={handleMouseEnter}>
-            <svg className={css.logoIcon}>
-              <use href={`${sprite}#icon-arrow-circle-broken-right`}></use>
-            </svg>
+            <Icon id={'arrow-circle-broken-right'} />
           </button>
           {isPopupOpen && (
             <div className={css.popup} onMouseLeave={handleMouseLeave}>
@@ -141,33 +132,26 @@ export default function Card({
                     onClick={() => handleMoveCard(column._id)}
                   >
                     <span className={css.popTitle}>{column.title}</span>
-                    <svg className={css.popIcon}>
-                      <use
-                        href={`${sprite}#icon-arrow-circle-broken-right`}
-                      ></use>
-                    </svg>
+                    <Icon id={'arrow-circle-broken-right'} />
                   </button>
                 </div>
               ))}
             </div>
           )}
           <button className={css.btnCard} onClick={() => setIsEditing(true)}>
-            <svg className={css.logoIcon}>
-              <use href={`${sprite}#icon-pencil-01`}></use>
-            </svg>
+            <Icon id={'pencel'} />
           </button>
           <button className={css.btnCard} onClick={handleDeleteCard}>
-            <svg className={css.logoIcon}>
-              <use href={`${sprite}#icon-trash-04`}></use>
-            </svg>
+            <Icon id={'trash-04'} />
           </button>
         </div>
       </div>
       {isEditing && (
         <EditCard
           card={{ id, columnId, title, description, priority, deadline }}
+          isEditing={isEditing}
           onSave={handleEditCard}
-          onClose={() => setIsEditing(false)}
+          onClose={setIsEditing}
         />
       )}
     </div>

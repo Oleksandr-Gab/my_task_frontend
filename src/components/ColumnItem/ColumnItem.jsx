@@ -3,50 +3,43 @@ import { useEffect, useState, useMemo, useRef } from 'react';
 import { selectCards } from '../../redux/cards/selectors';
 import { fetchCards } from '../../redux/cards/operations';
 import {
-  createColumn,
   deleteColumn,
   editColumn,
   fetchColumns,
 } from '../../redux/columns/slice';
 import { addCard } from '../../redux/cards/operations.js';
 import css from './ColumnItem.module.css';
-import sprite from '../../assets/sprite.svg';
-import {
-  selectColumnsData,
-  selectLoading,
-  selectError,
-} from '../../redux/columns/selectors';
 import Modal from 'react-modal';
 import Card from '../Card/Card.jsx';
 import AddCard from '../Card/AddCard.jsx';
-import toast from 'react-hot-toast';
 import { FiX } from 'react-icons/fi';
 import Icon from '../Icon/Icon';
 
 export default function ColumnItem({ id, boardId, title, idBoard }) {
-  const dispatch = useDispatch();
-  const [idColumn, setIdColumn] = useState(id);
   let [isModalOpen, setIsModalOpen] = useState(false);
   let [isModalAddCardOpen, setIsModalAddCardOpen] = useState(false);
   const [columnTitle, setColumnTitle] = useState(title);
-  let [oneBoardId, setoneBoardId] = useState(boardId);
-
-  // useEffect(() => {
-  //   dispatch(fetchCards(id));
-  // }, [dispatch, id]);
-
+  const arrayRef = useRef(false);
+  const dispatch = useDispatch();
   const cards = useSelector(selectCards);
-  const columns = useSelector(selectColumnsData);
+  // const isLoading = useSelector(state => state.boards.loading);
+  // const error = useSelector(state => state.boards.error);
 
-  // console.log(columns);
+  // console.log(cards);
+
+  useEffect(() => {
+    if (arrayRef.current) return;
+    arrayRef.current = true;
+    dispatch(fetchCards(id));
+  }, [dispatch, id]);
 
   const columnCards = useMemo(() => {
-    const filteredCards = cards.filter(card => card.column === idColumn);
+    const filteredCards = cards.filter(card => card.column === id);
     return filteredCards;
-  }, [cards, idColumn]);
+  }, [cards, id]);
 
-  const handleDeleteColumn = () => {
-    dispatch(deleteColumn(idColumn));
+  const handleDeleteColumn = async () => {
+    await dispatch(deleteColumn(id));
     dispatch(fetchColumns(idBoard));
   };
 
@@ -54,7 +47,7 @@ export default function ColumnItem({ id, boardId, title, idBoard }) {
     e.preventDefault();
 
     let newObj = {
-      columnId: idColumn,
+      columnId: id,
       editColumn: {
         title: columnTitle,
       },
@@ -91,21 +84,22 @@ export default function ColumnItem({ id, boardId, title, idBoard }) {
         </ul>
       </div>
       <ul className={css.cardsList}>
-        {columnCards.map(item => {
-          return (
-            <li className={css.cardItem} key={item._id}>
-              <Card
-                id={item._id}
-                boardId={item.board}
-                columnId={item.column}
-                title={item.title}
-                description={item.description}
-                priority={item.priority}
-                deadline={item.deadline}
-              />
-            </li>
-          );
-        })}
+        {arrayRef &&
+          columnCards.map(item => {
+            return (
+              <li className={css.cardItem} key={item._id}>
+                <Card
+                  id={item._id}
+                  boardId={item.board}
+                  columnId={item.column}
+                  title={item.title}
+                  description={item.description}
+                  priority={item.priority}
+                  deadline={item.deadline}
+                />
+              </li>
+            );
+          })}
       </ul>
       <div>
         <button className={css.buttonAddCard} onClick={handleAddCard}>

@@ -14,6 +14,7 @@ import { fetchColumns } from '../../redux/columns/operations';
 import { FiX } from 'react-icons/fi';
 
 import BeatLoader from 'react-spinners/BeatLoader';
+import { Typography } from '@mui/material';
 
 Modal.setAppElement('#root');
 
@@ -21,6 +22,7 @@ export default function MainDashboard() {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newColumnTitle, setNewColumnTitle] = useState('');
+  const [error, setError] = useState('');
 
   const loading = useSelector(selectLoading);
   // const error = useSelector(selectError);
@@ -31,11 +33,12 @@ export default function MainDashboard() {
     dispatch(fetchColumns(board._id));
   }, [dispatch, board]);
 
-  // console.log(columns);
-  // console.log(loading);
-
   const handleAddColumn = e => {
     e.preventDefault();
+    if (!newColumnTitle.trim()) {
+      setError('Title is required');
+      return;
+    }
 
     let newObj = {
       boardId: board._id,
@@ -44,6 +47,8 @@ export default function MainDashboard() {
 
     dispatch(createColumn(newObj));
     dispatch(fetchColumns(board._id));
+    setNewColumnTitle('');
+    setError('');
     setIsModalOpen(false);
   };
 
@@ -103,8 +108,6 @@ export default function MainDashboard() {
             <form
               onSubmit={e => {
                 e.preventDefault();
-                // handleAddColumn();
-                // form.reset();
               }}
               className={css.modalForm}
             >
@@ -115,6 +118,14 @@ export default function MainDashboard() {
                 placeholder="Column title"
                 className={css.modalInput}
               />
+              {error && (
+                <Typography
+                  color="error"
+                  sx={{ marginBottom: 1, color: 'red' }}
+                >
+                  {error}
+                </Typography>
+              )}
               <button
                 type="button"
                 onClick={handleAddColumn}

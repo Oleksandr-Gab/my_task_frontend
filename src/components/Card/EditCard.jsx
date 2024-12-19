@@ -1,9 +1,7 @@
-import { useState } from "react";
-import Modal from "react-modal";
-import css from "./AddCard.module.css";
+import { useState } from 'react';
+import Modal from 'react-modal';
 
-export default function EditCard({ card, onSave, onClose }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export default function EditCard({ card, onSave, onClose, isEditing }) {
   const [newTitle, setNewTitle] = useState(card.title);
   const [newDescription, setNewDescription] = useState(card.description);
   const [newPriority, setNewPriority] = useState(card.priority);
@@ -11,7 +9,7 @@ export default function EditCard({ card, onSave, onClose }) {
 
   const handleEditCard = () => {
     if (newTitle.trim() && newDescription.trim() && newDeadline.trim()) {
-        onSave({
+      onSave({
         ...card,
         title: newTitle,
         description: newDescription,
@@ -19,21 +17,20 @@ export default function EditCard({ card, onSave, onClose }) {
         deadline: new Date(newDeadline).toISOString(),
       });
     } else {
-      alert("Please fill in all fields.");
+      alert('Please fill in all fields.');
     }
   };
 
   return (
     <div>
-      
       <Modal
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
+        isOpen={isEditing}
+        onRequestClose={() => onClose(false)}
         contentLabel="Edit Card"
       >
         <h2>Edit card</h2>
         <form
-          onSubmit={(e) => {
+          onSubmit={e => {
             e.preventDefault();
             handleEditCard();
           }}
@@ -41,13 +38,13 @@ export default function EditCard({ card, onSave, onClose }) {
           <input
             type="text"
             value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
+            onChange={e => setNewTitle(e.target.value)}
             placeholder="Card title"
             required
           />
           <textarea
             value={newDescription}
-            onChange={(e) => setNewDescription(e.target.value)}
+            onChange={e => setNewDescription(e.target.value)}
             placeholder="Card description"
             required
           />
@@ -55,7 +52,7 @@ export default function EditCard({ card, onSave, onClose }) {
             Priority:
             <select
               value={newPriority}
-              onChange={(e) => setNewPriority(e.target.value)}
+              onChange={e => setNewPriority(e.target.value)}
               required
             >
               <option value="Low">Low</option>
@@ -68,13 +65,13 @@ export default function EditCard({ card, onSave, onClose }) {
             <input
               type="datetime-local"
               value={newDeadline}
-              onChange={(e) => setNewDeadline(e.target.value)}
+              onChange={e => setNewDeadline(e.target.value)}
               required
             />
           </label>
           <button type="submit">Edit</button>
         </form>
-        <button onClick={() => setIsModalOpen(false)}>Close</button>
+        <button onClick={() => onClose(false)}>Close</button>
       </Modal>
     </div>
   );

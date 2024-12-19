@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import toast, { Toaster } from 'react-hot-toast';
 import {
   addCard,
   editCard,
@@ -38,10 +37,7 @@ const cardSlice = createSlice({
         const cardIndex = state.items.findIndex(
           item => item.id === action.payload.id
         );
-        // -1 ??????????? -------------------------------------------------
-        if (cardIndex === -1) {
-          return toast.error('Card not found.', { duration: 2000 });
-        }
+
         state.items[cardIndex] = action.payload;
       })
       .addCase(editCard.rejected, state => {
@@ -66,7 +62,6 @@ const cardSlice = createSlice({
         state.error = false;
       })
       .addCase(moveCard.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.loading = false;
         state.items.push(action.payload);
       })
@@ -78,9 +73,11 @@ const cardSlice = createSlice({
         state.loading = true;
         state.error = false;
       })
+
       .addCase(fetchCards.fulfilled, (state, action) => {
-        state.loading = false;
         state.items = [...state.items, ...action.payload];
+        state.loading = false;
+        state.error = false;
       })
       .addCase(fetchCards.rejected, state => {
         state.loading = false;

@@ -1,6 +1,4 @@
 import { useState } from 'react';
-// import { FiEdit2 } from 'react-icons/fi';
-// import { MdOutlineDeleteOutline } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import {
   deleteBoard,
@@ -20,13 +18,9 @@ const BoardItem = ({ board }) => {
     dispatch(getBoard(idBoard));
   };
 
-  const handleDelete = async _id => {
-    await dispatch(deleteBoard(_id));
-    try {
-      dispatch(fetchBoards());
-    } catch (error) {
-      console.log(error);
-    }
+  const handleDelete = _id => {
+    dispatch(deleteBoard(_id));
+    dispatch(fetchBoards());
   };
 
   const handleEditModalOpen = () => {

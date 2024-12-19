@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+
+import { addBoard } from '../../redux/boards/operations';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -7,8 +10,8 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { addBoard, fetchBoards } from '../../redux/boards/operations';
-import BackgroundSelector from '../BackgroundSelector/BackgroundSelector'; // Импорт компонента BackgroundSelector
+
+import BackgroundSelector from '../BackgroundSelector/BackgroundSelector';
 import IconSelector from '../IconSelector/IconSelector';
 
 const style = {
@@ -45,7 +48,6 @@ const CreateNewBoardModal = ({ show, onClose, title }) => {
     };
 
     dispatch(addBoard(newBoard));
-    dispatch(fetchBoards());
     onClose();
   };
 
@@ -97,6 +99,11 @@ const CreateNewBoardModal = ({ show, onClose, title }) => {
               borderRadius: '8px',
             }} // Установка цвета текста для TextField
           />
+          {error && (
+            <Typography color="error" sx={{ marginTop: 0, color: 'red' }}>
+              {error}
+            </Typography>
+          )}
 
           <IconSelector
             selectedIcon={selectedIcon}
@@ -107,15 +114,6 @@ const CreateNewBoardModal = ({ show, onClose, title }) => {
             setSelectedBackground={setSelectedBackground}
             sx={{ marginRight: '10px' }}
           />
-
-          {error && (
-            <Typography
-              color="error"
-              sx={{ marginTop: 2, color: 'var(--text-color)' }}
-            >
-              {error}
-            </Typography>
-          )}
           <Button
             type="submit"
             variant="contained"

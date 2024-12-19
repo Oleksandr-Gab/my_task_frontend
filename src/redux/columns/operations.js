@@ -1,10 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// const setBoardIdHeader = boardId => {
-//   axios.defaults.headers.common['boardId'] = boardId;
-// };
-
 // --------------------------------------------------------
 export const fetchColumns = createAsyncThunk(
   'columns/fetchAll',
@@ -15,7 +11,6 @@ export const fetchColumns = createAsyncThunk(
           boardId: currentBoard,
         },
       });
-      // console.log(response.data.columns);
       return response.data.columns;
     } catch (error) {
       return thunkAPI.rejectWithValue({
