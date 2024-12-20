@@ -42,7 +42,7 @@ export default function App() {
       <Suspense fallback={<IsRefreshingComponent />}>
         <Routes>
           <Route
-            path="/"
+            path="/welcome"
             element={<RestrictedRoute component={<WelcomePage />} />}
           />
           <Route
