@@ -6,7 +6,7 @@ export const fetchColumns = createAsyncThunk(
   'columns/fetchAll',
   async (currentBoard, thunkAPI) => {
     try {
-      const response = await axios.get('/api/columns/', {
+      const response = await axios.get('/columns/', {
         params: {
           boardId: currentBoard,
         },
@@ -26,7 +26,7 @@ export const getColumn = createAsyncThunk(
   'columns/getColumn',
   async (columnId, thunkAPI) => {
     try {
-      const response = await axios.get(`api/columns/${columnId}`);
+      const response = await axios.get(`/columns/${columnId}`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({
@@ -42,7 +42,7 @@ export const createColumn = createAsyncThunk(
   'columns/createColumn',
   async (newColumn, thunkAPI) => {
     try {
-      const response = await axios.post('/api/columns/', newColumn);
+      const response = await axios.post('/columns/', newColumn);
       return response.data.column;
     } catch (error) {
       return thunkAPI.rejectWithValue({
@@ -58,7 +58,7 @@ export const deleteColumn = createAsyncThunk(
   'columns/deleteColumn',
   async (columnId, thunkAPI) => {
     try {
-      const response = await axios.delete(`/api/columns/${columnId}`);
+      const response = await axios.delete(`/columns/${columnId}`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({
@@ -74,7 +74,7 @@ export const editColumn = createAsyncThunk(
   'columns/updateColumn',
   async ({ columnId, editColumn }, thunkAPI) => {
     try {
-      const response = await axios.put(`/api/columns/${columnId}`, editColumn);
+      const response = await axios.put(`/columns/${columnId}`, editColumn);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({

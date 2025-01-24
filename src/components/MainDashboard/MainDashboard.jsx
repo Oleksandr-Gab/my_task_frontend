@@ -46,6 +46,7 @@ export default function MainDashboard() {
     };
 
     dispatch(createColumn(newObj));
+    // cards = [];
     dispatch(fetchColumns(board._id));
     setNewColumnTitle('');
     setError('');

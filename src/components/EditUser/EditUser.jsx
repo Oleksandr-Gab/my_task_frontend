@@ -20,6 +20,7 @@ const EditUser = () => {
   };
 
   const handleSubmit = async e => {
+    e.preventDefault();
     const formData = new FormData();
     formData.append('userName', userName);
     formData.append('email', email);

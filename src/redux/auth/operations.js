@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // --------------------------------------------------
-axios.defaults.baseURL = 'https://my-task-backend-lt5n.onrender.com';
+axios.defaults.baseURL = 'https://my-task-backend-6e7s.onrender.com/api/';
 // --------------------------------------------------
 
 const setAuthHeader = token => {
@@ -89,12 +89,16 @@ export const refreshUser = createAsyncThunk(
 );
 
 // ----------------------------
-export const help = createAsyncThunk('auth/support', async (_, thunkAPI) => {
-  try {
-    const response = await axios.post('/api/help/');
-    setAuthHeader(response.data.token);
-    return response.data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error);
+export const help = createAsyncThunk(
+  'auth/support',
+  async (credentials, thunkAPI) => {
+    try {
+      const response = await axios.post('/help/', credentials);
+      setAuthHeader(response.data.token);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
-});
+);

@@ -1,6 +1,9 @@
 import Sidebar from '../../components/Sidebar/Sidebar.jsx';
 import Header from '../../components/Header/Header.jsx';
 import ScreensPage from '../../pages/ScreensPage/ScreensPage.jsx';
+
+import { ToastContainer } from 'react-toastify';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -37,6 +40,7 @@ export default function HomePage() {
         <Header className={css.header} />
         <ScreensPage className={css.screensPage} />
       </div>
+      <ToastContainer />
     </div>
   );
 }

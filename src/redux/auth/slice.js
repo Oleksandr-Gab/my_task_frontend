@@ -5,8 +5,10 @@ import {
   editUser,
   logOut,
   refreshUser,
+  help,
   // userThema,
 } from './operations';
+import { toast } from 'react-toastify';
 
 const authSlice = createSlice({
   name: 'auth',
@@ -93,6 +95,22 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.isRefreshing = false;
         localStorage.removeItem('token');
+      })
+      .addCase(help.pending, state => {
+        toast.loading('is pending...');
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(help.fulfilled, (state, action) => {
+        toast.dismiss();
+        toast.success(action.payload.message + '👌');
+        state.loading = false;
+      })
+      .addCase(help.rejected, (state, action) => {
+        toast.dismiss();
+        toast.error(action.payload.response.data + '🤯 😣');
+        state.loading = false;
+        state.error = true;
       }),
 });
 
