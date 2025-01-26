@@ -49,6 +49,7 @@ export default function Card({
 
   const handleDeleteCard = () => {
     dispatch(deleteCard(id));
+    dispatch(fetchColumns(board._id));
   };
   const handleMouseEnter = () => {
     setIsPopupOpen(true);
