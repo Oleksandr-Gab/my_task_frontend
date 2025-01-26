@@ -1,14 +1,12 @@
 import EditCard from './EditCard.jsx';
 import { useState } from 'react';
-import {
-  editCard,
-  moveCard,
-  deleteCard,
-} from '../../redux/cards/operations.js';
+import { editCard, deleteCard } from '../../redux/cards/operations.js';
 import { useDispatch, useSelector } from 'react-redux';
 import css from './Card.module.css';
 import { selectColumnsData } from '../../redux/columns/selectors.js';
 import Icon from '../Icon/Icon.jsx';
+import { selectOneBoard } from '../../redux/boards/selectors.js';
+import { fetchColumns } from '../../redux/columns/operations.js';
 
 const formatDate = dateString => {
   const date = new Date(dateString);
@@ -28,6 +26,7 @@ export default function Card({
   const [isEditing, setIsEditing] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const columns = useSelector(selectColumnsData);
+  const board = useSelector(selectOneBoard);
   const dispatch = useDispatch();
 
   const checkDeadline = deadline => {
@@ -37,46 +36,15 @@ export default function Card({
   };
   const isDeadlineDay = checkDeadline(deadline);
 
-  const handleEditCard = updateCard => {
-    dispatch(editCard({ cardId: id, updateCard }));
-    setIsEditing(false);
-  };
+  const handleMoveCard = columnId => {
+    let cardId = id;
+    let editCardData = {
+      column: columnId,
+    };
+    console.log(cardId, editCardData);
 
-  // ---------------------------------------------------
-  // перенесення картки ( не знайшов чому не спрацьовує setOneColumnId(newId);)
-
-  // console.log(oneColumnId);
-  // const objCard = {
-  //   title: title,
-  //   description: description,
-  //   priority: priority,
-  //   columnId: oneColumnId,
-  //   board: boardId,
-  //   deadline: deadline,
-  // };
-
-  // const newCardObj = {
-  //   cardId: id,
-  //   newCard: objCard,
-  // };
-
-  // const handleMoveCard = () => {
-  //   console.log(oneColumnId);
-  //   dispatch(moveCard(newCardObj));
-  //   setIsPopupOpen(false);
-  // };
-
-  // const handleTransferCard = newId => {
-  // console.log(newId);
-  // setOneColumnId(newId);
-  //   handleMoveCard();
-  // };
-
-  // --------------------------------------------
-
-  const handleMoveCard = newColumnId => {
-    dispatch(moveCard({ cardId: id, columnId: newColumnId }));
-    setIsPopupOpen(false);
+    dispatch(editCard({ cardId, editCardData }));
+    dispatch(fetchColumns(board._id));
   };
 
   const handleDeleteCard = () => {
@@ -119,23 +87,25 @@ export default function Card({
             </button>
           )}
 
-          <button className={css.btnCard} onMouseEnter={handleMouseEnter}>
+          <button className={css.btnCard} onMouseDown={handleMouseEnter}>
             <Icon id={'arrow-circle-broken-right'} />
           </button>
           {isPopupOpen && (
             <div className={css.popup} onMouseLeave={handleMouseLeave}>
-              {columns.map(column => (
-                <div key={column._id}>
-                  <button
-                    type="button"
-                    className={css.popBox}
-                    onClick={() => handleMoveCard(column._id)}
-                  >
-                    <span className={css.popTitle}>{column.title}</span>
-                    <Icon id={'arrow-circle-broken-right'} />
-                  </button>
-                </div>
-              ))}
+              {columns
+                .filter(column => column._id !== columnId)
+                .map(column => (
+                  <div key={column._id}>
+                    <button
+                      type="button"
+                      className={css.popBox}
+                      onClick={() => handleMoveCard(column._id)}
+                    >
+                      <span className={css.popTitle}>{column.title}</span>
+                      <Icon id={'arrow-circle-broken-right'} />
+                    </button>
+                  </div>
+                ))}
             </div>
           )}
           <button className={css.btnCard} onClick={() => setIsEditing(true)}>
@@ -150,7 +120,6 @@ export default function Card({
         <EditCard
           card={{ id, columnId, title, description, priority, deadline }}
           isEditing={isEditing}
-          onSave={handleEditCard}
           onClose={setIsEditing}
         />
       )}

@@ -1,6 +1,12 @@
-import { Box } from '@mui/material';
 import { useState } from 'react';
 import Modal from 'react-modal';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { Box, Typography } from '@mui/material';
+
+import { editCard } from '../../redux/cards/operations';
+import { selectOneBoard } from '../../redux/boards/selectors';
+import { fetchColumns } from '../../redux/columns/operations';
 
 const style = {
   position: 'absolute',
@@ -15,24 +21,32 @@ const style = {
   p: 4,
 };
 
-export default function EditCard({ card, onSave, onClose, isEditing }) {
-  const [newTitle, setNewTitle] = useState(card.title);
-  const [newDescription, setNewDescription] = useState(card.description);
-  const [newPriority, setNewPriority] = useState(card.priority);
-  const [newDeadline, setNewDeadline] = useState(card.deadline);
+export default function EditCard({ card, onClose, isEditing }) {
+  const [title, setTitle] = useState(card.title);
+  const [description, setDescription] = useState(card.description);
+  const [priority, setPriority] = useState(card.priority);
+  const [deadline, setDeadline] = useState(card.deadline);
+  const [error, setError] = useState('');
+  const board = useSelector(selectOneBoard);
+  const dispatch = useDispatch();
 
   const handleEditCard = () => {
-    if (newTitle.trim() && newDescription.trim() && newDeadline.trim()) {
-      onSave({
-        ...card,
-        title: newTitle,
-        description: newDescription,
-        priority: newPriority,
-        deadline: new Date(newDeadline).toISOString(),
-      });
-    } else {
-      alert('Please fill in all fields.');
+    if (!title.trim() && !description.trim() && !deadline.trim()) {
+      setError('Please fill in all fields');
+      return;
     }
+    let cardId = card.id;
+
+    let editCardData = {
+      title: title,
+      description: description,
+      priority: priority,
+      deadline: new Date(deadline),
+    };
+
+    dispatch(editCard({ cardId, editCardData }));
+    dispatch(fetchColumns(board._id));
+    onClose();
   };
 
   return (
@@ -52,22 +66,22 @@ export default function EditCard({ card, onSave, onClose, isEditing }) {
           >
             <input
               type="text"
-              value={newTitle}
-              onChange={e => setNewTitle(e.target.value)}
+              value={title}
+              onChange={e => setTitle(e.target.value)}
               placeholder="Card title"
               required
             />
             <textarea
-              value={newDescription}
-              onChange={e => setNewDescription(e.target.value)}
+              value={description}
+              onChange={e => setDescription(e.target.value)}
               placeholder="Card description"
               required
             />
             <label>
               Priority:
               <select
-                value={newPriority}
-                onChange={e => setNewPriority(e.target.value)}
+                value={priority}
+                onChange={e => setPriority(e.target.value)}
                 required
               >
                 <option value="Low">Low</option>
@@ -79,8 +93,8 @@ export default function EditCard({ card, onSave, onClose, isEditing }) {
               Deadline:
               <input
                 type="datetime-local"
-                value={newDeadline}
-                onChange={e => setNewDeadline(e.target.value)}
+                value={deadline.slice(0, 19)}
+                onChange={e => setDeadline(e.target.value)}
                 required
               />
             </label>
@@ -88,6 +102,11 @@ export default function EditCard({ card, onSave, onClose, isEditing }) {
           </form>
           <button onClick={() => onClose(false)}>Close</button>
         </Box>
+        {error && (
+          <Typography color="error" sx={{ marginTop: 0, color: 'red' }}>
+            {error}
+          </Typography>
+        )}
       </Modal>
     </div>
   );

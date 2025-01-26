@@ -147,7 +147,7 @@
 .popup {
   width: 135x;
   position: absolute;
-  top: 150%;
+  top: 50%;
   background-color: var(--modal-backgr);
   padding: 18px;
   border: 1px solid var(--text-color);

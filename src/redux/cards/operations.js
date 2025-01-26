@@ -31,9 +31,12 @@ export const addCard = createAsyncThunk(
 
 export const editCard = createAsyncThunk(
   'cards/updateCard',
-  async ({ cardId, editCard }, thunkAPI) => {
+  async ({ cardId, editCardData }, thunkAPI) => {
     try {
-      const response = await axios.put(`/cards/${cardId}`, editCard);
+      console.log(cardId, editCardData);
+      const response = await axios.put(`/cards/${cardId}`, editCardData);
+      console.log(response.data);
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

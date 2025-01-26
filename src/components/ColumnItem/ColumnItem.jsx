@@ -7,7 +7,7 @@ import {
   editColumn,
   fetchColumns,
 } from '../../redux/columns/slice';
-import { addCard } from '../../redux/cards/operations.js';
+
 import css from './ColumnItem.module.css';
 import Modal from 'react-modal';
 import Card from '../Card/Card.jsx';
@@ -24,8 +24,6 @@ export default function ColumnItem({ id, boardId, title, idBoard }) {
   const cards = useSelector(selectCards);
   // const isLoading = useSelector(state => state.boards.loading);
   // const error = useSelector(state => state.boards.error);
-
-  // console.log(cards);
 
   useEffect(() => {
     if (arrayRef.current) return;
@@ -58,9 +56,6 @@ export default function ColumnItem({ id, boardId, title, idBoard }) {
     setIsModalOpen(false);
   };
 
-  const handleCreateCard = newCard => {
-    dispatch(addCard(newCard));
-  };
   const handleAddCard = () => {
     setIsModalAddCardOpen(true);
   };
@@ -110,7 +105,6 @@ export default function ColumnItem({ id, boardId, title, idBoard }) {
         <AddCard
           columnId={id}
           boardId={boardId}
-          onAddCard={handleCreateCard}
           isModalOpen={isModalAddCardOpen}
           setIsModalOpen={setIsModalAddCardOpen}
         />

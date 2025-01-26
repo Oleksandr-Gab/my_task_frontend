@@ -1,13 +1,18 @@
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+
 import Modal from 'react-modal';
+import toast from 'react-hot-toast';
+
+import { addCard } from '../../redux/cards/operations.js';
+import { fetchColumns } from '../../redux/columns/operations.js';
+
 import css from './AddCard.module.css';
 import sprite from '../../assets/sprite.svg';
-import toast from 'react-hot-toast';
 
 export default function AddCard({
   columnId,
   boardId,
-  onAddCard,
   isModalOpen,
   setIsModalOpen,
 }) {
@@ -15,6 +20,7 @@ export default function AddCard({
   const [cardDescription, setCardDescription] = useState('');
   const [cardPriority, setCardPriority] = useState('Low');
   const [cardDeadline, setCardDeadline] = useState('');
+  const dispatch = useDispatch();
 
   const handleAddCard = () => {
     if (cardTitle.trim() && cardDescription.trim() && cardDeadline.trim()) {
@@ -24,18 +30,21 @@ export default function AddCard({
       if (selectedDeadline < now) {
         return toast('Deadline must be in the future');
       }
-      onAddCard({
-        columnId,
-        title: cardTitle,
-        description: cardDescription,
-        priority: cardPriority,
-        deadline: new Date(cardDeadline).toISOString(),
-        board: boardId,
-      });
+      dispatch(
+        addCard({
+          columnId,
+          title: cardTitle,
+          description: cardDescription,
+          priority: cardPriority,
+          deadline: new Date(cardDeadline),
+          board: boardId,
+        })
+      );
       setCardTitle('');
       setCardDescription('');
       setCardPriority('Low');
       setCardDeadline('');
+      dispatch(fetchColumns(boardId));
       setIsModalOpen(false);
     } else {
       alert('Please fill in all fields.');
