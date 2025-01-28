@@ -5,7 +5,6 @@ import Modal from 'react-modal';
 import toast from 'react-hot-toast';
 
 import { addCard } from '../../redux/cards/operations.js';
-import { fetchColumns } from '../../redux/columns/operations.js';
 
 import css from './AddCard.module.css';
 import sprite from '../../assets/sprite.svg';
@@ -44,7 +43,6 @@ export default function AddCard({
       setCardDescription('');
       setCardPriority('Low');
       setCardDeadline('');
-      dispatch(fetchColumns(boardId));
       setIsModalOpen(false);
     } else {
       alert('Please fill in all fields.');
@@ -120,8 +118,8 @@ export default function AddCard({
             <label>
               <input
                 type="radio"
-                value="Critical"
-                checked={cardPriority === 'Critical'}
+                value="Without"
+                checked={cardPriority === 'Without'}
                 onChange={e => setCardPriority(e.target.value)}
               />
               <span className={css.radioLabel} style={{ color: '#000000' }}>

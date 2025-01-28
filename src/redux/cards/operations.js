@@ -22,7 +22,8 @@ export const addCard = createAsyncThunk(
   async (newCard, thunkAPI) => {
     try {
       const response = await axios.post('/cards/', newCard);
-      return response.data;
+
+      return response.data.card;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -33,11 +34,10 @@ export const editCard = createAsyncThunk(
   'cards/updateCard',
   async ({ cardId, editCardData }, thunkAPI) => {
     try {
-      console.log(cardId, editCardData);
       const response = await axios.put(`/cards/${cardId}`, editCardData);
-      console.log(response.data);
+      console.log(response.data.card);
 
-      return response.data;
+      return response.data.card;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

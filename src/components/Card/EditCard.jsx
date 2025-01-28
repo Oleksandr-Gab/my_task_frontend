@@ -45,7 +45,7 @@ export default function EditCard({ card, onClose, isEditing }) {
     };
 
     dispatch(editCard({ cardId, editCardData }));
-    dispatch(fetchColumns(board._id));
+    // dispatch(fetchColumns(board._id));
     onClose();
   };
 
