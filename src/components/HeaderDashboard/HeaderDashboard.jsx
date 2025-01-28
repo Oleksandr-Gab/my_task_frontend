@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import Modal from 'react-modal';
 import css from './HeaderDashboard.module.css';
 import { LuFilter } from 'react-icons/lu';
 import { selectBoards, selectOneBoard } from '../../redux/boards/selectors';
+import FilterModal from '../FilterModal/FilterModal';
 
 export default function HeaderDashboard() {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+
   const [title, setTitle] = useState('');
   const board = useSelector(selectOneBoard);
   const boards = useSelector(selectBoards);
+
+  const openModal = () => setIsFilterModalOpen(true);
+  const closeModal = () => setIsFilterModalOpen(false);
 
   useEffect(() => {
     if (boards.length == 0) {
@@ -23,36 +27,15 @@ export default function HeaderDashboard() {
   return (
     <header className={css.headerDashboard}>
       <h1>{title}</h1>
-      <button
-        onClick={() => setIsFilterModalOpen(true)}
-        className={css.filterButton}
-      >
+      <button onClick={openModal} className={css.filterButton}>
         <LuFilter />
         Filters
       </button>
+      <FilterModal
+        isOpen={isFilterModalOpen}
+        closeModal={closeModal}
+        board={board}
+      />
     </header>
   );
 }
-
-// <Modal
-// isOpen={isFilterModalOpen}
-// onRequestClose={() => setIsFilterModalOpen(false)}
-// contentLabel="Filters"
-// className={css.modal}
-// overlayClassName={css.overlay}
-// >
-// <div className={css.modalContent}>
-//   <h2>Filters</h2>
-//   <form>
-//     {/* Форма для зміни фону та фільтрів */}
-//     <input
-//       type="color"
-//       onChange={e => handleBackgroundChange(e.target.value)}
-//     />
-//     {/* Інші елементи форми */}
-//     <button type="button" onClick={() => setIsFilterModalOpen(false)}>
-//       Close
-//     </button>
-//   </form>
-// </div>
-// </Modal>

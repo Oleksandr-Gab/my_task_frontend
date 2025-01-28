@@ -1,11 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import {
-  addCard,
-  editCard,
-  deleteCard,
-  fetchCards,
-  moveCard,
-} from './operations';
+import { createSlice, current } from '@reduxjs/toolkit';
+import { addCard, editCard, deleteCard, fetchCards } from './operations';
 import { logOut } from '../auth/operations';
 
 const cardSlice = createSlice({
@@ -23,12 +17,11 @@ const cardSlice = createSlice({
       })
 
       .addCase(fetchCards.fulfilled, (state, action) => {
-        let arr = [...state.items, ...action.payload];
-        arr = [...new Map(arr.map(obj => [`${obj._id}`, obj])).values()];
-
-        state.items = arr;
         state.loading = false;
         state.error = false;
+        let arr = [...state.items, ...action.payload];
+        arr = [...new Map(arr.map(obj => [`${obj._id}`, obj])).values()];
+        state.items = arr;
       })
       .addCase(fetchCards.rejected, state => {
         state.loading = false;
@@ -51,11 +44,13 @@ const cardSlice = createSlice({
         state.error = false;
       })
       .addCase(editCard.fulfilled, (state, action) => {
-        const cardIndex = state.items.findIndex(
-          item => item.id === action.payload.id
+        state.loading = false;
+        const cardIndex = current(state.items).findIndex(
+          item => item._id === action.payload._id
         );
-
-        state.items[cardIndex] = action.payload;
+        if (cardIndex !== -1) {
+          state.items[cardIndex] = action.payload;
+        }
       })
       .addCase(editCard.rejected, state => {
         state.loading = false;
@@ -67,26 +62,15 @@ const cardSlice = createSlice({
       })
       .addCase(deleteCard.fulfilled, (state, action) => {
         state.loading = false;
+        console.log(state.items);
+
         state.items = state.items.filter(item => item._id !== action.meta.arg);
       })
       .addCase(deleteCard.rejected, state => {
         state.loading = false;
         state.error = true;
       })
-      // ----------????????????????????????????????????????
-      .addCase(moveCard.pending, state => {
-        state.loading = true;
-        state.error = false;
-      })
-      .addCase(moveCard.fulfilled, (state, action) => {
-        state.loading = false;
-        state.items.push(action.payload);
-      })
-      .addCase(moveCard.rejected, state => {
-        state.loading = false;
-        state.error = true;
-      })
-      // ----------------------??????????????????????????????????
+
       .addCase(logOut.fulfilled, state => {
         state.items = [];
         state.loading = false;

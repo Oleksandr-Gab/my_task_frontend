@@ -80,7 +80,7 @@ export default function AddCard({
           className={css.textarea}
         />
         <label>
-          Priority:
+          Label color:
           <div>
             <label>
               <input
@@ -89,7 +89,7 @@ export default function AddCard({
                 checked={cardPriority === 'Low'}
                 onChange={e => setCardPriority(e.target.value)}
               />
-              <span className={css.radioLabel} style={{ color: '#E09CB5' }}>
+              <span className={css.radioLabel} style={{ color: '#8FA1D0' }}>
                 Low
               </span>
             </label>
@@ -100,7 +100,7 @@ export default function AddCard({
                 checked={cardPriority === 'Medium'}
                 onChange={e => setCardPriority(e.target.value)}
               />
-              <span className={css.radioLabel} style={{ color: '#BEDBB0' }}>
+              <span className={css.radioLabel} style={{ color: '#E09CB5' }}>
                 Medium
               </span>
             </label>
@@ -111,7 +111,7 @@ export default function AddCard({
                 checked={cardPriority === 'High'}
                 onChange={e => setCardPriority(e.target.value)}
               />
-              <span className={css.radioLabel} style={{ color: '#8FA1D0' }}>
+              <span className={css.radioLabel} style={{ color: '#BEDBB0' }}>
                 High
               </span>
             </label>
@@ -122,7 +122,7 @@ export default function AddCard({
                 checked={cardPriority === 'Without'}
                 onChange={e => setCardPriority(e.target.value)}
               />
-              <span className={css.radioLabel} style={{ color: '#000000' }}>
+              <span className={css.radioLabel} style={{ color: '#1616164D' }}>
                 Without
               </span>
             </label>

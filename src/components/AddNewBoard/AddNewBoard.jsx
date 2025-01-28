@@ -2,7 +2,6 @@ import { useState } from 'react';
 import css from './AddNewBoard.module.css';
 
 import CreateNewBoardModal from '../CreateNewBoard/CreateNewBoardModal';
-// import Icon from '../Icon/Icon';
 
 const AddNewBoard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

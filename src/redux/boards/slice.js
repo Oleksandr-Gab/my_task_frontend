@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 import {
   fetchBoards,
   getBoard,
@@ -35,8 +35,8 @@ const boardSlice = createSlice({
         state.error = false;
       })
       .addCase(getBoard.fulfilled, (state, action) => {
-        state.oneBoard = action.payload;
         state.loading = false;
+        state.oneBoard = action.payload;
       })
       .addCase(getBoard.rejected, state => {
         state.loading = false;
@@ -61,9 +61,9 @@ const boardSlice = createSlice({
         state.error = false;
       })
       .addCase(addBoard.fulfilled, (state, action) => {
-        state.boards.push(action.payload);
         state.loading = false;
         state.error = false;
+        state.boards.push(action.payload);
       })
       .addCase(addBoard.rejected, state => {
         state.loading = false;
@@ -74,7 +74,7 @@ const boardSlice = createSlice({
         state.error = false;
       })
       .addCase(editBoard.fulfilled, (state, action) => {
-        const boardIndex = state.boards.findIndex(
+        const boardIndex = current(state.boards).findIndex(
           item => item.id === action.payload.id
         );
         // -1 ??????????? -------------------------------------------------

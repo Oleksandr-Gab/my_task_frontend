@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { Box, Typography } from '@mui/material';
 
 import { editCard } from '../../redux/cards/operations';
-import { selectOneBoard } from '../../redux/boards/selectors';
-import { fetchColumns } from '../../redux/columns/operations';
+// import { selectOneBoard } from '../../redux/boards/selectors';
+// import { fetchColumns } from '../../redux/columns/operations';
 
 const style = {
   position: 'absolute',
@@ -27,7 +27,6 @@ export default function EditCard({ card, onClose, isEditing }) {
   const [priority, setPriority] = useState(card.priority);
   const [deadline, setDeadline] = useState(card.deadline);
   const [error, setError] = useState('');
-  const board = useSelector(selectOneBoard);
   const dispatch = useDispatch();
 
   const handleEditCard = () => {
@@ -45,7 +44,6 @@ export default function EditCard({ card, onClose, isEditing }) {
     };
 
     dispatch(editCard({ cardId, editCardData }));
-    // dispatch(fetchColumns(board._id));
     onClose();
   };
 

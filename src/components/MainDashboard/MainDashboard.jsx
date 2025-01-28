@@ -25,7 +25,6 @@ export default function MainDashboard() {
   const [error, setError] = useState('');
 
   const loading = useSelector(selectLoading);
-  // const error = useSelector(selectError);
   const board = useSelector(selectOneBoard);
   const columns = useSelector(selectColumnsData);
 
@@ -46,7 +45,6 @@ export default function MainDashboard() {
     };
 
     dispatch(createColumn(newObj));
-    dispatch(fetchColumns(board._id));
     setNewColumnTitle('');
     setError('');
     setIsModalOpen(false);
@@ -68,7 +66,6 @@ export default function MainDashboard() {
                     <ColumnItem
                       id={item._id}
                       boardId={item.board}
-                      owner={item.owner}
                       title={item.title}
                       idBoard={board._id}
                     />

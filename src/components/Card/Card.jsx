@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import css from './Card.module.css';
 import { selectColumnsData } from '../../redux/columns/selectors.js';
 import Icon from '../Icon/Icon.jsx';
-import { selectOneBoard } from '../../redux/boards/selectors.js';
-import { fetchColumns } from '../../redux/columns/operations.js';
-import { selectCards } from '../../redux/cards/selectors.js';
+// import { selectOneBoard } from '../../redux/boards/selectors.js';
+// import { fetchColumns } from '../../redux/columns/operations.js';
+// import { selectCards } from '../../redux/cards/selectors.js';
 
 const formatDate = dateString => {
   const date = new Date(dateString);
@@ -27,10 +27,7 @@ export default function Card({
   const [isEditing, setIsEditing] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const columns = useSelector(selectColumnsData);
-  const board = useSelector(selectOneBoard);
   const dispatch = useDispatch();
-
-  // console.log(cards);
 
   const checkDeadline = deadline => {
     const today = new Date();
@@ -44,15 +41,12 @@ export default function Card({
     let editCardData = {
       column: columnId,
     };
-    console.log(cardId, editCardData);
 
     dispatch(editCard({ cardId, editCardData }));
-    // dispatch(fetchColumns(board._id));
   };
 
   const handleDeleteCard = () => {
     dispatch(deleteCard(id));
-    // dispatch(fetchColumns(board._id));
   };
   const handleMouseEnter = () => {
     setIsPopupOpen(true);

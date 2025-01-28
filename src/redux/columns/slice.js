@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 import {
   fetchColumns,
   getColumn,
@@ -72,7 +72,7 @@ const columnSlice = createSlice({
         state.error = false;
       })
       .addCase(editColumn.fulfilled, (state, action) => {
-        const columnIndex = state.items.findIndex(
+        const columnIndex = current(state.items).findIndex(
           item => item._id === action.payload._id
         );
         if (columnIndex !== -1) {

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState, useMemo, useRef } from 'react';
-import { selectCards } from '../../redux/cards/selectors';
+import { selectFilteredCards } from '../../redux/cards/selectors';
 import { fetchCards } from '../../redux/cards/operations';
 import {
   deleteColumn,
@@ -18,12 +18,11 @@ import Icon from '../Icon/Icon';
 export default function ColumnItem({ id, boardId, title, idBoard }) {
   let [isModalOpen, setIsModalOpen] = useState(false);
   let [isModalAddCardOpen, setIsModalAddCardOpen] = useState(false);
+
   const [columnTitle, setColumnTitle] = useState(title);
   const arrayRef = useRef(false);
   const dispatch = useDispatch();
-  const cards = useSelector(selectCards);
-  // const isLoading = useSelector(state => state.boards.loading);
-  // const error = useSelector(state => state.boards.error);
+  const cards = useSelector(selectFilteredCards);
 
   useEffect(() => {
     if (arrayRef.current) return;
@@ -52,13 +51,13 @@ export default function ColumnItem({ id, boardId, title, idBoard }) {
     };
 
     dispatch(editColumn(newObj));
-    dispatch(fetchColumns(idBoard));
     setIsModalOpen(false);
   };
 
   const handleAddCard = () => {
     setIsModalAddCardOpen(true);
   };
+
   return (
     <div className={css.columnItem}>
       <div className={css.columnList}>
